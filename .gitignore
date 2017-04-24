@@ -1,0 +1,4 @@
+/dist/*
+!dist/index.html
+/memes.json
+/node_modules
