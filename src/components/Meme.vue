@@ -4,6 +4,7 @@
     :class="{ 'meme-container-clicked': clicked }"
     @click="copy"
     @mouseleave="hover"
+    v-if="!errored"
   >
     <iframe
       v-if="isEmbed"
@@ -26,7 +27,10 @@ import copyToClipboard from "../copyToClipboard";
 
 export default {
   props: { url: String },
-  data: () => ({ clicked: false }),
+  data: () => ({
+    errored: false,
+    clicked: false
+  }),
   computed: {
     isEmbed() {
       return /youtu/.test(this.url);
@@ -43,6 +47,22 @@ export default {
     hover() {
       this.clicked = false;
     }
+  },
+  beforeMount() {
+    if (this.isEmbed) {
+      return;
+    }
+
+    // Be pessimistic
+    this.errored = true;
+
+    const img = new Image();
+
+    img.onload = () => {
+      this.errored = img.naturalWidth < 10 || img.naturalHeight < 10;
+    };
+
+    img.src = this.url;
   }
 };
 </script>

@@ -25,4 +25,3 @@ $ npm run local
 
 - Be able to add and remove memes from GUI
 - Annotate memes with tags, be able to search for them
-- Timeout for media load, and remove elements that hit it
