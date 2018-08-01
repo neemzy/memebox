@@ -53,13 +53,14 @@ export default {
       return;
     }
 
-    // Be pessimistic
-    this.errored = true;
-
     const img = new Image();
 
     img.onload = () => {
       this.errored = img.naturalWidth < 10 || img.naturalHeight < 10;
+    };
+
+    img.onerror = () => {
+      this.errored = true;
     };
 
     img.src = this.url;
