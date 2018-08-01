@@ -4,7 +4,6 @@
     :class="{ 'meme-container-clicked': clicked }"
     @click="copy"
     @mouseleave="hover"
-    v-if="!errored"
   >
     <iframe
       v-if="isEmbed"
@@ -47,7 +46,7 @@ export default {
     hover() {
       this.clicked = false;
     }
-  },
+  }/*,
   beforeMount() {
     if (this.isEmbed) {
       return;
@@ -63,6 +62,6 @@ export default {
     };
 
     img.src = this.url;
-  }
+  }*/
 };
 </script>
